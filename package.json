@@ -11,6 +11,14 @@
     "test": "jest ./src",
     "build": "tsc"
   },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,js}"
+    ]
+  },
   "dependencies": {
     "typescript": "^4.4.4"
   },
