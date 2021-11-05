@@ -5,6 +5,12 @@
   "repository": "https://github.com/zfchung/conway-game-of-life-1.git",
   "author": "ZF Chung (Zack) <zfchung1@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node ./dist",
+    "dev": "ts-node ./src",
+    "test": "jest ./src",
+    "build": "tsc"
+  },
   "dependencies": {
     "typescript": "^4.4.4"
   },
