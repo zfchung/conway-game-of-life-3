@@ -9,14 +9,17 @@ describe("Test World class", () => {
         expect(world.isEmpty()).toBe(true);
     });
 
-    xdescribe("Test World.empty() method", () => {
-        it("should return empty world", () => {
+    it("should stays empty after a tick", () => {
+        // Given
+        const world = new World();
+        expect(world.isEmpty()).toBe(true);
+        // When
+        const newWorld = world.tick();
+        // Then
+        expect(newWorld).not.toBe(world);
+        expect(newWorld.isEmpty()).toBe(true);
 
-        })
-    })
-
-    xit("should stays empty after a tick", () => {
-
+        // Note: Understand the difference of toBe, toEqual, toStrictEqual
     });
 
     xit("should be not empty after adding a new cell", () => {
