@@ -1,9 +1,20 @@
 export class World {
-    public isEmpty(){
+    public isEmpty() {
         return true;
     }
 
-    public tick(){
+    public tick() {
         return new World();
+    }
+
+    public displayResult() {
+        const result = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]
+        ];
+        return result;
     }
 }

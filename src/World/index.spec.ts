@@ -22,11 +22,32 @@ describe("Test World class", () => {
         // Note: Understand the difference of toBe, toEqual, toStrictEqual
     });
 
-    xit("should be not empty after adding a new cell", () => {
+    it("should be able to add new cells", () => {
 
     })
 
-    xit("should be able to add new cells", () => {
+    xit("should be not empty after adding a new cell", () => {
+        // Given
+        const world = new World();
+        // When
 
+        // Then
+    })
+
+    it("should return matrix of the empty World", () => {
+        // Given
+        const world = new World();
+        // When
+        // TODO: Replace this with a empty() method
+        expect(world.isEmpty()).toBe(true);
+        const expectedResult = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]
+        ];
+        // Then
+        expect(world.displayResult()).toEqual(expectedResult);
     })
 })

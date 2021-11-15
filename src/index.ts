@@ -1,3 +1,5 @@
-export function hello(){
-    return "Hello World!";
-}
+import {World} from "./World";
+
+
+const world = new World();
+console.log(world.displayResult());
