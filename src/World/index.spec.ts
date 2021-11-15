@@ -22,16 +22,11 @@ describe("Test World class", () => {
         // Note: Understand the difference of toBe, toEqual, toStrictEqual
     });
 
-    it("should be able to add new cells", () => {
+    xit("should be able to add new cells", () => {
 
     })
 
     xit("should be not empty after adding a new cell", () => {
-        // Given
-        const world = new World();
-        // When
-
-        // Then
     })
 
     it("should return matrix of the empty World", () => {
