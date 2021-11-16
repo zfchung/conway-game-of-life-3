@@ -35,7 +35,7 @@ export class World {
         coordinate = new NewCoordinate(2,2);
         this.newCoordinateList[coordinate.getId()] = coordinate;
 
-        coordinate = new NewCoordinate(2,3);
+        coordinate = new NewCoordinate(3,2);
         this.newCoordinateList[coordinate.getId()] = coordinate;
     }
 
@@ -46,6 +46,7 @@ export class World {
     public tick() {
         const newWorld = new World();
         newWorld.calculateNextGeneration();
+        newWorld.newCalculateCountOfNeighbours();
         return newWorld;
     }
 
@@ -69,6 +70,12 @@ export class World {
                 }
                 this.coordinateList[i][j].cell.setCountOfLivingNeighbours(count);
             }
+        }
+    }
+
+    private newCalculateCountOfNeighbours(){
+        for(let key in this.newCoordinateList){
+            const neighbourCoordinateList = this.newCoordinateList[key].getNeighbourCoordinateList();
         }
     }
 
