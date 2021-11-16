@@ -1,24 +1,13 @@
+import {Cell} from "../Cell";
+
 export class Coordinate {
-    constructor(private coordinateX: number, private coordinateY: number) {
+    constructor(public coordinateX: number, public coordinateY: number, public cell: Cell) {
     }
 
-    public getNeighbourList(): Coordinate[] {
-        const neighbourCoordinateList = this.getNeighbourCoordinates();
-        return neighbourCoordinateList;
-    }
+// impossible to return the # of alive cells
+// it can only return the sibling coordinates
 
-    private getNeighbourCoordinates(): Coordinate[] {
-        const coordinateList: Coordinate[] = [];
+// This class is a 2D Coordinate calculation
+// If we change it to 3D Coordinate, the World class wouldn't be impacted as we abstracted the calculation into Coordinate class
 
-        for (let x = (this.coordinateX - 1); x <= (this.coordinateX + 1); x++) {
-            for (let y = (this.coordinateY - 1); y <= (this.coordinateY + 1); y++) {
-                if (x !== this.coordinateX || y !== this.coordinateY) {
-                    const neighbourCoordinate = new Coordinate(x, y);
-                    coordinateList.push(neighbourCoordinate);
-                }
-            }
-        }
-
-        return coordinateList;
-    }
 }
