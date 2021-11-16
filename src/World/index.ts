@@ -1,10 +1,12 @@
 import {Cell} from "../Cell";
 import {Coordinate} from "../Coordinate";
+import {NewCoordinate} from "../NewCoordinate";
 
 export class World {
     private row: number = 6;
     private column: number = 6;
-    public coordinateList: any[] = [];
+    private coordinateList: any[] = [];
+    private newCoordinateList: Record<string, NewCoordinate> = {};
 
     constructor() {
         this.setCoordinateList();
@@ -23,6 +25,17 @@ export class World {
         this.coordinateList[2][2].cell.setIsAlive(true);
         this.coordinateList[3][2].cell.setIsAlive(true);
         this.calculateCountOfLivingNeighbour();
+    }
+
+    private setNewCoordinateList() {
+        let coordinate = new NewCoordinate(1,2);
+        this.newCoordinateList[coordinate.getId()] = coordinate;
+
+        coordinate = new NewCoordinate(2,2);
+        this.newCoordinateList[coordinate.getId()] = coordinate;
+
+        coordinate = new NewCoordinate(2,3);
+        this.newCoordinateList[coordinate.getId()] = coordinate;
     }
 
     public isEmpty() {
