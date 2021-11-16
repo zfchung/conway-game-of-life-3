@@ -10,6 +10,7 @@ export class World {
 
     constructor() {
         this.setCoordinateList();
+        this.setNewCoordinateList();
     }
 
     public setCoordinateList() {
