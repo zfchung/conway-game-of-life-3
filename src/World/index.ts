@@ -7,9 +7,11 @@ export class World {
     private column: number = 6;
     private coordinateList: any[] = [];
     public newCoordinateList: Record<string, NewCoordinate> = {};
+    private newLiveCoordinateList: Record<string, NewCoordinate> = {};
 
     constructor() {
         this.setCoordinateList();
+        this.setNewLivingCoordinateList();
         this.setNewCoordinateList();
     }
 
@@ -28,15 +30,19 @@ export class World {
         this.calculateCountOfLivingNeighbour();
     }
 
-    private setNewCoordinateList() {
+    private setNewCoordinateList(){
+        this.newCoordinateList = NewCoordinate.getCoordinateList();
+    }
+
+    private setNewLivingCoordinateList() {
         let coordinate = new NewCoordinate(1,2);
-        this.newCoordinateList[coordinate.getId()] = coordinate;
+        this.newLiveCoordinateList[coordinate.getId()] = coordinate;
 
         coordinate = new NewCoordinate(2,2);
-        this.newCoordinateList[coordinate.getId()] = coordinate;
+        this.newLiveCoordinateList[coordinate.getId()] = coordinate;
 
         coordinate = new NewCoordinate(3,2);
-        this.newCoordinateList[coordinate.getId()] = coordinate;
+        this.newLiveCoordinateList[coordinate.getId()] = coordinate;
     }
 
     public isEmpty() {
@@ -74,12 +80,12 @@ export class World {
     }
 
     private newCalculateCountOfNeighbours(){
-        const newCoordinateListKeys = Object.keys(this.newCoordinateList);
+        const newLiveCoordinateListKeys = Object.keys(this.newLiveCoordinateList);
         for(let key in this.newCoordinateList){
             const coordinate = this.newCoordinateList[key];
 
             const neighbourCoordinateList = coordinate.getNeighbourCoordinateList();
-            const aliveNeighbourList = newCoordinateListKeys.filter(value => neighbourCoordinateList.includes(value));
+            const aliveNeighbourList = newLiveCoordinateListKeys.filter(value => neighbourCoordinateList.includes(value));
             const countOfAliveNeighbours = aliveNeighbourList.length;
             coordinate.setCountOfLivingNeighbours(countOfAliveNeighbours);
         }

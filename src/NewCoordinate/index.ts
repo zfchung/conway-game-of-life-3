@@ -1,11 +1,25 @@
 export class NewCoordinate {
     private countOfLivingNeighbour: number = 0;
+    private static row: number = 6;
+    private static column: number = 6;
 
     constructor(private coordinateX: number, private coordinateY: number) {
     }
 
     public getId() {
         return this.coordinateX + "_" + this.coordinateY;
+    }
+
+    public static getCoordinateList(): Record<string, NewCoordinate> {
+        let coordinateList: Record<string, NewCoordinate> = {};
+        for(let i = 0 ; i < this.row; i++){
+            for(let j = 0; j < this.column; j++){
+                const coordinate = new NewCoordinate(i,j);
+                coordinateList[coordinate.getId()] = coordinate;
+            }
+        }
+
+        return coordinateList;
     }
 
     public getNeighbourCoordinateList() {
