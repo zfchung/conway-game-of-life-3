@@ -2,16 +2,10 @@ import {World} from "./World";
 
 const world = new World();
 
-console.log(world.displayResult())
-console.log(world.newCoordinateRecord);
-console.log(Object.keys(world.newCoordinateRecord).length);
+console.log(world.newDisplayResult())
 
 const newWorld = world.tick();
-console.log(newWorld.newCoordinateRecord);
-console.log(Object.keys(newWorld.newCoordinateRecord).length);
-console.log(newWorld.displayResult());
 console.log(newWorld.newDisplayResult());
-//TODO: check deadcell's alive neighbour count too
 
 
 //

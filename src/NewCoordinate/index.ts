@@ -1,5 +1,5 @@
 export class NewCoordinate {
-    public countOfLivingNeighbour: number = 0;
+    private countOfLivingNeighbour: number = 0;
     private static row: number = 6;
     private static column: number = 6;
 
@@ -44,6 +44,14 @@ export class NewCoordinate {
 
     public setCountOfLivingNeighbours(value: number) {
         this.countOfLivingNeighbour = value;
+    }
+
+    public getCountOfLivingNeighbours() {
+        return this.countOfLivingNeighbour;
+    }
+
+    public static getRow() {
+        return this.row;
     }
 
 }
