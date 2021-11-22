@@ -1,4 +1,4 @@
-export class NewCoordinate {
+export class Coordinate {
     private countOfLivingNeighbour: number = 0;
     private static row: number = 6;
     private static column: number = 6;
@@ -10,11 +10,11 @@ export class NewCoordinate {
         return this.coordinateX + "_" + this.coordinateY;
     }
 
-    public static getCoordinateList(): Record<string, NewCoordinate> {
-        let coordinateList: Record<string, NewCoordinate> = {};
+    public static getCoordinateList(): Record<string, Coordinate> {
+        let coordinateList: Record<string, Coordinate> = {};
         for(let i = 0 ; i < this.row; i++){
             for(let j = 0; j < this.column; j++){
-                const coordinate = new NewCoordinate(i,j);
+                const coordinate = new Coordinate(i,j);
                 coordinateList[coordinate.getId()] = coordinate;
             }
         }

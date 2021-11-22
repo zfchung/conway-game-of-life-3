@@ -1,7 +1,7 @@
-import {NewCoordinate} from "../NewCoordinate";
+import {Coordinate} from "../NewCoordinate";
 
 export class World {
-    public coordinateRecord: Record<string, NewCoordinate> = {};
+    public coordinateRecord: Record<string, Coordinate> = {};
     private liveCoordinateList: string[] = [];
 
     constructor() {
@@ -10,7 +10,7 @@ export class World {
     }
 
     private setCoordinateList() {
-        this.coordinateRecord = NewCoordinate.getCoordinateList();
+        this.coordinateRecord = Coordinate.getCoordinateList();
     }
 
     private setLivingCoordinateList() {
@@ -41,8 +41,8 @@ export class World {
 
     private calculateNextGeneration() {
 
-        const liveCoordinateRecord: Record<string, NewCoordinate> = {};
-        const deadCoordinateRecord: Record<string, NewCoordinate> = Object.assign({}, this.coordinateRecord);
+        const liveCoordinateRecord: Record<string, Coordinate> = {};
+        const deadCoordinateRecord: Record<string, Coordinate> = Object.assign({}, this.coordinateRecord);
         const newNewLiveCoordinateList: string[] = [];
 
         for(let value of this.liveCoordinateList){
@@ -87,7 +87,7 @@ export class World {
         for(let value of resultList){
             rowList.push(value);
             count++;
-            if(count == NewCoordinate.getRow()){
+            if(count == Coordinate.getRow()){
                 result.push(rowList);
                 rowList = [];
                 count = 0;
