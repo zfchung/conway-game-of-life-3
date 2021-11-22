@@ -23,12 +23,12 @@ export class World {
 
     public tick() {
         const newWorld = new World();
-        newWorld.newCalculateCountOfNeighbours();
-        newWorld.calculateNewNextGeneration();
+        newWorld.calculateCountOfNeighbours();
+        newWorld.calculateNextGeneration();
         return newWorld;
     }
 
-    private newCalculateCountOfNeighbours() {
+    private calculateCountOfNeighbours() {
         for (let key in this.coordinateRecord) {
             const coordinate = this.coordinateRecord[key];
 
@@ -39,7 +39,7 @@ export class World {
         }
     }
 
-    private calculateNewNextGeneration() {
+    private calculateNextGeneration() {
 
         const liveCoordinateRecord: Record<string, NewCoordinate> = {};
         const deadCoordinateRecord: Record<string, NewCoordinate> = Object.assign({}, this.coordinateRecord);
@@ -69,7 +69,7 @@ export class World {
         this.liveCoordinateList = newNewLiveCoordinateList;
     }
 
-    public newDisplayResult() {
+    public displayResult() {
 
         const coordinateKeys = Object.keys(this.coordinateRecord);
         const resultList: number[] = coordinateKeys.map( value => {

@@ -2,7 +2,7 @@ import {World} from "./World";
 
 const world = new World();
 
-console.log(world.newDisplayResult())
+console.log(world.displayResult())
 
 const newWorld = world.tick();
-console.log(newWorld.newDisplayResult());
+console.log(newWorld.displayResult());
