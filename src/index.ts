@@ -6,7 +6,6 @@ console.log(world.displayResult())
 
 const newWorld = world.tick();
 console.log(newWorld.displayResult());
-console.log(newWorld.newCoordinateList);
 //TODO: check deadcell's alive neighbour count too
 
 

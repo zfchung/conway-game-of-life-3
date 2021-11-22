@@ -6,8 +6,8 @@ export class World {
     private row: number = 6;
     private column: number = 6;
     private coordinateList: any[] = [];
-    public newCoordinateList: Record<string, NewCoordinate> = {};
-    private newLiveCoordinateList: Record<string, NewCoordinate> = {};
+    private newCoordinateRecord: Record<string, NewCoordinate> = {};
+    private newLiveCoordinateList: string[] = [];
 
     constructor() {
         this.setCoordinateList();
@@ -30,19 +30,12 @@ export class World {
         this.calculateCountOfLivingNeighbour();
     }
 
-    private setNewCoordinateList(){
-        this.newCoordinateList = NewCoordinate.getCoordinateList();
+    private setNewCoordinateList() {
+        this.newCoordinateRecord = NewCoordinate.getCoordinateList();
     }
 
     private setNewLivingCoordinateList() {
-        let coordinate = new NewCoordinate(1,2);
-        this.newLiveCoordinateList[coordinate.getId()] = coordinate;
-
-        coordinate = new NewCoordinate(2,2);
-        this.newLiveCoordinateList[coordinate.getId()] = coordinate;
-
-        coordinate = new NewCoordinate(3,2);
-        this.newLiveCoordinateList[coordinate.getId()] = coordinate;
+        this.newLiveCoordinateList = ["1_2", "2_2", "3_2"];
     }
 
     public isEmpty() {
@@ -53,6 +46,7 @@ export class World {
         const newWorld = new World();
         newWorld.calculateNextGeneration();
         newWorld.newCalculateCountOfNeighbours();
+        newWorld.calculateNewNextGeneration();
         return newWorld;
     }
 
@@ -64,14 +58,14 @@ export class World {
                 let count = 0;
                 for (let k = -1; k <= 1; k++) {
                     for (let l = -1; l <= 1; l++) {
-                        if ( (i + k) >= 0 && (j + l) >=0 && (i + k ) < this.row && (j + l) < this.column){
-                            if(this.coordinateList[i + k][j + l].cell.isAlive){
+                        if ((i + k) >= 0 && (j + l) >= 0 && (i + k) < this.row && (j + l) < this.column) {
+                            if (this.coordinateList[i + k][j + l].cell.isAlive) {
                                 count++;
                             }
                         }
                     }
                 }
-                if(this.coordinateList[i][j].cell.isAlive){
+                if (this.coordinateList[i][j].cell.isAlive) {
                     count--;
                 }
                 this.coordinateList[i][j].cell.setCountOfLivingNeighbours(count);
@@ -79,13 +73,12 @@ export class World {
         }
     }
 
-    private newCalculateCountOfNeighbours(){
-        const newLiveCoordinateListKeys = Object.keys(this.newLiveCoordinateList);
-        for(let key in this.newCoordinateList){
-            const coordinate = this.newCoordinateList[key];
+    private newCalculateCountOfNeighbours() {
+        for (let key in this.newCoordinateRecord) {
+            const coordinate = this.newCoordinateRecord[key];
 
             const neighbourCoordinateList = coordinate.getNeighbourCoordinateList();
-            const aliveNeighbourList = newLiveCoordinateListKeys.filter(value => neighbourCoordinateList.includes(value));
+            const aliveNeighbourList = this.newLiveCoordinateList.filter(value => neighbourCoordinateList.includes(value));
             const countOfAliveNeighbours = aliveNeighbourList.length;
             coordinate.setCountOfLivingNeighbours(countOfAliveNeighbours);
         }
@@ -109,6 +102,36 @@ export class World {
                 }
             }
         }
+    }
+
+    private calculateNewNextGeneration() {
+
+        const liveCoordinateRecord: Record<string, NewCoordinate> = {};
+        const deadCoordinateRecord: Record<string, NewCoordinate> = this.newCoordinateRecord;
+        const newNewLiveCoordinateList: string[] = [];
+
+        for(let value of this.newLiveCoordinateList){
+            liveCoordinateRecord[value] = this.newCoordinateRecord[value];
+            delete deadCoordinateRecord[value];
+        }
+
+        for(let key in liveCoordinateRecord){
+            const liveNeighbourCount = liveCoordinateRecord[key].countOfLivingNeighbour;
+            if (liveNeighbourCount == 2 ||liveNeighbourCount == 3) {
+                const coordinateId = liveCoordinateRecord[key].getId();
+                newNewLiveCoordinateList.push(coordinateId);
+            }
+        }
+
+        for(let key in deadCoordinateRecord){
+            const liveNeighbourCount = deadCoordinateRecord[key].countOfLivingNeighbour;
+            if (liveNeighbourCount == 3) {
+                const coordinateId = deadCoordinateRecord[key].getId();
+                newNewLiveCoordinateList.push(coordinateId);
+            }
+        }
+
+        this.newLiveCoordinateList = newNewLiveCoordinateList;
     }
 
     public displayResult() {

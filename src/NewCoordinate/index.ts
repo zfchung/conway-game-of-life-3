@@ -1,5 +1,5 @@
 export class NewCoordinate {
-    private countOfLivingNeighbour: number = 0;
+    public countOfLivingNeighbour: number = 0;
     private static row: number = 6;
     private static column: number = 6;
 
