@@ -1,7 +1,7 @@
 export class NewCoordinate {
+    private countOfLivingNeighbour: number = 0;
 
     constructor(private coordinateX: number, private coordinateY: number) {
-
     }
 
     public getId() {
@@ -26,6 +26,10 @@ export class NewCoordinate {
         }
 
         return neighbourList;
+    }
+
+    public setCountOfLivingNeighbours(value: number) {
+        this.countOfLivingNeighbour = value;
     }
 
 }

@@ -6,7 +6,7 @@ export class World {
     private row: number = 6;
     private column: number = 6;
     private coordinateList: any[] = [];
-    private newCoordinateList: Record<string, NewCoordinate> = {};
+    public newCoordinateList: Record<string, NewCoordinate> = {};
 
     constructor() {
         this.setCoordinateList();
@@ -74,8 +74,14 @@ export class World {
     }
 
     private newCalculateCountOfNeighbours(){
+        const newCoordinateListKeys = Object.keys(this.newCoordinateList);
         for(let key in this.newCoordinateList){
-            const neighbourCoordinateList = this.newCoordinateList[key].getNeighbourCoordinateList();
+            const coordinate = this.newCoordinateList[key];
+
+            const neighbourCoordinateList = coordinate.getNeighbourCoordinateList();
+            const aliveNeighbourList = newCoordinateListKeys.filter(value => neighbourCoordinateList.includes(value));
+            const countOfAliveNeighbours = aliveNeighbourList.length;
+            coordinate.setCountOfLivingNeighbours(countOfAliveNeighbours);
         }
     }
 
