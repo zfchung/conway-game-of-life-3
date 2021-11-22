@@ -6,7 +6,7 @@ export class World {
     private row: number = 6;
     private column: number = 6;
     private coordinateList: any[] = [];
-    private newCoordinateRecord: Record<string, NewCoordinate> = {};
+    public newCoordinateRecord: Record<string, NewCoordinate> = {};
     private newLiveCoordinateList: string[] = [];
 
     constructor() {
@@ -107,7 +107,7 @@ export class World {
     private calculateNewNextGeneration() {
 
         const liveCoordinateRecord: Record<string, NewCoordinate> = {};
-        const deadCoordinateRecord: Record<string, NewCoordinate> = this.newCoordinateRecord;
+        const deadCoordinateRecord: Record<string, NewCoordinate> = Object.assign({}, this.newCoordinateRecord);
         const newNewLiveCoordinateList: string[] = [];
 
         for(let value of this.newLiveCoordinateList){
@@ -156,6 +156,18 @@ export class World {
                 }
             }
         }
+
+        return resultList;
+    }
+
+    public newDisplayResult() {
+
+        const coordinateKeys = Object.keys(this.newCoordinateRecord);
+        const resultList: number[] = coordinateKeys.map( value => {
+            if(this.newLiveCoordinateList.includes(value)){
+                return 1;
+            } else return 0;
+        });
 
         return resultList;
     }
