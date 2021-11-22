@@ -1,25 +1,20 @@
-import {Cell} from "../Cell";
-import {Coordinate} from "../Coordinate";
 import {NewCoordinate} from "../NewCoordinate";
 
 export class World {
-    private row: number = 6;
-    private column: number = 6;
-    private coordinateList: any[] = [];
-    public newCoordinateRecord: Record<string, NewCoordinate> = {};
-    private newLiveCoordinateList: string[] = [];
+    public coordinateRecord: Record<string, NewCoordinate> = {};
+    private liveCoordinateList: string[] = [];
 
     constructor() {
-        this.setNewLivingCoordinateList();
-        this.setNewCoordinateList();
+        this.setLivingCoordinateList();
+        this.setCoordinateList();
     }
 
-    private setNewCoordinateList() {
-        this.newCoordinateRecord = NewCoordinate.getCoordinateList();
+    private setCoordinateList() {
+        this.coordinateRecord = NewCoordinate.getCoordinateList();
     }
 
-    private setNewLivingCoordinateList() {
-        this.newLiveCoordinateList = ["1_2", "2_2", "3_2"];
+    private setLivingCoordinateList() {
+        this.liveCoordinateList = ["1_2", "2_2", "3_2"];
     }
 
     public isEmpty() {
@@ -34,11 +29,11 @@ export class World {
     }
 
     private newCalculateCountOfNeighbours() {
-        for (let key in this.newCoordinateRecord) {
-            const coordinate = this.newCoordinateRecord[key];
+        for (let key in this.coordinateRecord) {
+            const coordinate = this.coordinateRecord[key];
 
             const neighbourCoordinateList = coordinate.getNeighbourCoordinateList();
-            const aliveNeighbourList = this.newLiveCoordinateList.filter(value => neighbourCoordinateList.includes(value));
+            const aliveNeighbourList = this.liveCoordinateList.filter(value => neighbourCoordinateList.includes(value));
             const countOfAliveNeighbours = aliveNeighbourList.length;
             coordinate.setCountOfLivingNeighbours(countOfAliveNeighbours);
         }
@@ -47,11 +42,11 @@ export class World {
     private calculateNewNextGeneration() {
 
         const liveCoordinateRecord: Record<string, NewCoordinate> = {};
-        const deadCoordinateRecord: Record<string, NewCoordinate> = Object.assign({}, this.newCoordinateRecord);
+        const deadCoordinateRecord: Record<string, NewCoordinate> = Object.assign({}, this.coordinateRecord);
         const newNewLiveCoordinateList: string[] = [];
 
-        for(let value of this.newLiveCoordinateList){
-            liveCoordinateRecord[value] = this.newCoordinateRecord[value];
+        for(let value of this.liveCoordinateList){
+            liveCoordinateRecord[value] = this.coordinateRecord[value];
             delete deadCoordinateRecord[value];
         }
 
@@ -71,15 +66,15 @@ export class World {
             }
         }
 
-        this.newLiveCoordinateList = newNewLiveCoordinateList;
+        this.liveCoordinateList = newNewLiveCoordinateList;
     }
 
     public newDisplayResult() {
 
-        const coordinateKeys = Object.keys(this.newCoordinateRecord);
+        const coordinateKeys = Object.keys(this.coordinateRecord);
         const resultList: number[] = coordinateKeys.map( value => {
             let state = 0;
-            if(this.newLiveCoordinateList.includes(value)){
+            if(this.liveCoordinateList.includes(value)){
                 state = 1;
             }
             return state;
