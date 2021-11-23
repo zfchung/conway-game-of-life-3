@@ -1,19 +1,19 @@
 export class Coordinate {
     private countOfLivingNeighbour: number = 0;
-    private static row: number = 6;
-    private static column: number = 6;
+    private static rowSize: number = 6;
+    private static columnSize: number = 6;
 
-    constructor(private coordinateX: number, private coordinateY: number) {
+    constructor(private row: number, private column: number) {
     }
 
     public getId() {
-        return this.coordinateX + "_" + this.coordinateY;
+        return this.row + "_" + this.column;
     }
 
     public static getCoordinateList(): Record<string, Coordinate> {
         let coordinateList: Record<string, Coordinate> = {};
-        for(let i = 0 ; i < this.row; i++){
-            for(let j = 0; j < this.column; j++){
+        for(let i = 0 ; i < this.rowSize; i++){
+            for(let j = 0; j < this.columnSize; j++){
                 const coordinate = new Coordinate(i,j);
                 coordinateList[coordinate.getId()] = coordinate;
             }
@@ -26,15 +26,15 @@ export class Coordinate {
         let neighbourList = [];
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
-                const neighbourCoordinateX = this.coordinateX + i;
-                const neighbourCoordinateY = this.coordinateY + j;
+                const neighbourRow = this.row + i;
+                const neighbourColumn = this.column + j;
                 if (
-                    neighbourCoordinateX >= 0 &&
-                    neighbourCoordinateY >= 0 &&
-                    (neighbourCoordinateX != this.coordinateX ||
-                    neighbourCoordinateY != this.coordinateY)
+                    neighbourRow >= 0 &&
+                    neighbourColumn >= 0 &&
+                    (neighbourRow != this.row ||
+                    neighbourColumn != this.column)
                 ) {
-                    neighbourList.push(neighbourCoordinateX + "_" + neighbourCoordinateY);
+                    neighbourList.push(neighbourRow + "_" + neighbourColumn);
                 }
             }
         }
@@ -51,7 +51,7 @@ export class Coordinate {
     }
 
     public static getRow() {
-        return this.row;
+        return this.rowSize;
     }
 
 }
