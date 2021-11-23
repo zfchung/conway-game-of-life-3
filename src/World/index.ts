@@ -1,11 +1,10 @@
-import {Coordinate} from "../NewCoordinate";
+import {Coordinate} from "../Coordinate";
 
 export class World {
     public coordinateRecord: Record<string, Coordinate> = {};
     private liveCoordinateList: string[] = [];
 
     constructor() {
-        this.setLivingCoordinateList();
         this.setCoordinateList();
     }
 
@@ -13,8 +12,10 @@ export class World {
         this.coordinateRecord = Coordinate.getCoordinateList();
     }
 
-    private setLivingCoordinateList() {
-        this.liveCoordinateList = ["1_2", "2_2", "3_2"];
+    public setLivingCoordinateList(liveCells: string[]) {
+        // this.liveCoordinateList = ["1_2", "2_2", "3_2"];
+        // this.liveCoordinateList = ["1_1", "1_2", "2_1", "2_2"];
+        this.liveCoordinateList = liveCells;
     }
 
     public isEmpty() {
@@ -22,10 +23,11 @@ export class World {
     }
 
     public tick() {
-        const newWorld = new World();
-        newWorld.calculateCountOfNeighbours();
-        newWorld.calculateNextGeneration();
-        return newWorld;
+        const world = new World();
+        world.setLivingCoordinateList(this.liveCoordinateList)
+        world.calculateCountOfNeighbours();
+        world.calculateNextGeneration();
+        return world;
     }
 
     private calculateCountOfNeighbours() {
