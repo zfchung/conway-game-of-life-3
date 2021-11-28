@@ -1,8 +1,8 @@
 {
-  "name": "conway-game-of-life-1",
+  "name": "conway-game-of-life-3",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/zfchung/conway-game-of-life-1.git",
+  "repository": "https://github.com/zfchung/conway-game-of-life-3.git",
   "author": "ZF Chung (Zack) <zfchung1@gmail.com>",
   "license": "MIT",
   "scripts": {
