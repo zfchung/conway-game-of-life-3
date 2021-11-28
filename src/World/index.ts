@@ -17,10 +17,9 @@ export class World {
     }
 
     public tick() {
-        const world = new World(this.liveCoordinateList);
-        world.calculateCountOfNeighbours();
-        world.calculateNextGeneration();
-        return world;
+        this.calculateCountOfNeighbours();
+        const nextGenLiveCoordinateList = this.calculateNextGeneration();
+        return new World(nextGenLiveCoordinateList);
     }
 
     private calculateCountOfNeighbours() {
@@ -61,7 +60,7 @@ export class World {
             }
         }
 
-        this.liveCoordinateList = nextGenLiveCoordinateList;
+        return nextGenLiveCoordinateList;
     }
 
     public displayResult() {
