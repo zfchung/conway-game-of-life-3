@@ -1,7 +1,7 @@
 import {Coordinate} from "../Coordinate";
 
 export class World {
-    public coordinateRecord: Record<string, Coordinate> = {};
+    private coordinateRecord: Record<string, Coordinate> = {};
 
     constructor(private liveCoordinateList: string[]) {
         this.setCoordinateList();
