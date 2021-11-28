@@ -38,7 +38,7 @@ export class World {
 
         const liveCoordinateRecord: Record<string, Coordinate> = {};
         const deadCoordinateRecord: Record<string, Coordinate> = Object.assign({}, this.coordinateRecord);
-        const newNewLiveCoordinateList: string[] = [];
+        const nextGenLiveCoordinateList: string[] = [];
 
         for(let value of this.liveCoordinateList){
             liveCoordinateRecord[value] = this.coordinateRecord[value];
@@ -49,7 +49,7 @@ export class World {
             const liveNeighbourCount = liveCoordinateRecord[key].getCountOfLivingNeighbours();
             if (liveNeighbourCount == 2 ||liveNeighbourCount == 3) {
                 const coordinateId = liveCoordinateRecord[key].getId();
-                newNewLiveCoordinateList.push(coordinateId);
+                nextGenLiveCoordinateList.push(coordinateId);
             }
         }
 
@@ -57,11 +57,11 @@ export class World {
             const liveNeighbourCount = deadCoordinateRecord[key].getCountOfLivingNeighbours();
             if (liveNeighbourCount == 3) {
                 const coordinateId = deadCoordinateRecord[key].getId();
-                newNewLiveCoordinateList.push(coordinateId);
+                nextGenLiveCoordinateList.push(coordinateId);
             }
         }
 
-        this.liveCoordinateList = newNewLiveCoordinateList;
+        this.liveCoordinateList = nextGenLiveCoordinateList;
     }
 
     public displayResult() {
