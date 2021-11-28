@@ -2,7 +2,6 @@ import {Coordinate} from "../Coordinate";
 
 export class World {
     public coordinateRecord: Record<string, Coordinate> = {};
-    // private liveCoordinateList: string[] = [];
 
     constructor(private liveCoordinateList: string[]) {
         this.setCoordinateList();
