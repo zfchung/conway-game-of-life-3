@@ -1,6 +1,5 @@
 import {World} from "./World";
 
-const world = new World();
 const liveCellCoordinates = {
     blockShape: ["1_1", "1_2", "2_1", "2_2"],
     beehiveShape: ["1_2", "1_3", "2_1", "2_4", "3_2", "3_3"],
@@ -8,7 +7,7 @@ const liveCellCoordinates = {
     blinkerShape: ["1_2", "2_2", "3_2"],
     toadShape: ["2_2", "2_3", "2_4", "3_1", "3_2", "3_3"]
 };
-world.setLivingCoordinateList(liveCellCoordinates.beehiveShape);
+const world = new World(liveCellCoordinates.beaconShape);
 console.log(world.displayResult())
 
 const newWorld = world.tick();

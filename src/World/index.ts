@@ -2,9 +2,9 @@ import {Coordinate} from "../Coordinate";
 
 export class World {
     public coordinateRecord: Record<string, Coordinate> = {};
-    private liveCoordinateList: string[] = [];
+    // private liveCoordinateList: string[] = [];
 
-    constructor() {
+    constructor(private liveCoordinateList: string[]) {
         this.setCoordinateList();
     }
 
@@ -12,19 +12,12 @@ export class World {
         this.coordinateRecord = Coordinate.getCoordinateList();
     }
 
-    public setLivingCoordinateList(liveCells: string[]) {
-        // this.liveCoordinateList = ["1_2", "2_2", "3_2"];
-        // this.liveCoordinateList = ["1_1", "1_2", "2_1", "2_2"];
-        this.liveCoordinateList = liveCells;
-    }
-
     public isEmpty() {
         return true;
     }
 
     public tick() {
-        const world = new World();
-        world.setLivingCoordinateList(this.liveCoordinateList)
+        const world = new World(this.liveCoordinateList);
         world.calculateCountOfNeighbours();
         world.calculateNextGeneration();
         return world;
