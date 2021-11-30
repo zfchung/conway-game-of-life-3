@@ -2,9 +2,11 @@ import {Coordinate} from "../Coordinate";
 
 export class World {
     private coordinateRecord: Record<string, Coordinate> = {};
+    private liveCoordinateRecord: Record<string, Coordinate> = {};
 
     constructor(private liveCoordinateList: string[]) {
         this.setCoordinateList();
+        this.setCoordinateRecord();
     }
 
     private setCoordinateList() {
@@ -88,5 +90,14 @@ export class World {
         }
 
         return result;
+    }
+
+    private setCoordinateRecord() {
+        for(let value of this.liveCoordinateList){
+            const valueArr = value.split("_");
+            const row = Number(valueArr[0]);
+            const column = Number(valueArr[1]);
+            this.liveCoordinateRecord[value] = new Coordinate(row, column);
+        }
     }
 }
