@@ -7,14 +7,14 @@ const liveCellCoordinates = {
     blinkerShape: ["1_2", "2_2", "3_2"],
     toadShape: ["2_2", "2_3", "2_4", "3_1", "3_2", "3_3"]
 };
-const world = new World(liveCellCoordinates.beaconShape);
+const world = new World(liveCellCoordinates.blockShape);
 console.log(world.displayResult())
 
-const newWorld = world.tick();
+const newWorld = world.newTick();
 console.log(newWorld.displayResult());
 
-const newNewWorld = newWorld.tick();
+const newNewWorld = newWorld.newTick();
 console.log(newNewWorld.displayResult());
 
-const newNewNewWorld = newNewWorld.tick();
+const newNewNewWorld = newNewWorld.newTick();
 console.log(newNewNewWorld.displayResult());

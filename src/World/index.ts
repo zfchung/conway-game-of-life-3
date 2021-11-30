@@ -20,7 +20,6 @@ export class World {
 
     public tick() {
         this.calculateCountOfNeighbours();
-        this.newCalculateCountOfNeighbours();
         const nextGenLiveCoordinateList = this.calculateNextGeneration();
         return new World(nextGenLiveCoordinateList);
     }
@@ -134,4 +133,31 @@ export class World {
         }
     }
 
+    private newCalculateNextGeneration() {
+        const nextGenLiveCoordinateList: string[] = [];
+
+        for (let key in this.liveCoordinateRecord) {
+            const liveNeighbourCount = this.liveCoordinateRecord[key].getCountOfLivingNeighbours();
+            if (liveNeighbourCount == 2 || liveNeighbourCount == 3) {
+                const coordinateId = this.liveCoordinateRecord[key].getId();
+                nextGenLiveCoordinateList.push(coordinateId);
+            }
+        }
+
+        for (let key in this.allLiveCellDeadNeighbourRecord) {
+            const liveNeighbourCount = this.allLiveCellDeadNeighbourRecord[key].getCountOfLivingNeighbours();
+            if (liveNeighbourCount == 3) {
+                const coordinateId = this.allLiveCellDeadNeighbourRecord[key].getId();
+                nextGenLiveCoordinateList.push(coordinateId);
+            }
+        }
+
+        return nextGenLiveCoordinateList;
+    }
+
+    public newTick() {
+        this.newCalculateCountOfNeighbours();
+        const newNextGenLiveCoordinateList = this.newCalculateNextGeneration();
+        return new World(newNextGenLiveCoordinateList);
+    }
 }
