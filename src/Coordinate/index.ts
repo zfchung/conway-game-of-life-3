@@ -10,18 +10,6 @@ export class Coordinate {
         return this.row + "_" + this.column;
     }
 
-    public static getCoordinateList(): Record<string, Coordinate> {
-        let coordinateList: Record<string, Coordinate> = {};
-        for(let i = 0 ; i < this.rowSize; i++){
-            for(let j = 0; j < this.columnSize; j++){
-                const coordinate = new Coordinate(i,j);
-                coordinateList[coordinate.getId()] = coordinate;
-            }
-        }
-
-        return coordinateList;
-    }
-
     public getNeighbourCoordinateList() {
         let neighbourList = [];
         for (let i = -1; i <= 1; i++) {
