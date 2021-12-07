@@ -8,13 +8,13 @@ const liveCellCoordinates = {
     toadShape: ["2_2", "2_3", "2_4", "3_1", "3_2", "3_3"]
 };
 const world = new World(liveCellCoordinates.blockShape);
-console.log(world.displayResult())
+console.log(world.newDisplayResult())
 
 const newWorld = world.newTick();
-console.log(newWorld.displayResult());
+console.log(newWorld.newDisplayResult());
 
 const newNewWorld = newWorld.newTick();
-console.log(newNewWorld.displayResult());
+console.log(newNewWorld.newDisplayResult());
 
 const newNewNewWorld = newNewWorld.newTick();
-console.log(newNewNewWorld.displayResult());
+console.log(newNewNewWorld.newDisplayResult());
