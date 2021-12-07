@@ -83,8 +83,8 @@ export class World {
 
         for(let coordinate of liveCoordinateList){
             const rowAndColumn = coordinate.split("_");
-            const row = parseInt(rowAndColumn[0]);
-            const column = parseInt(rowAndColumn[1]);
+            const row = Number(rowAndColumn[0]);
+            const column = Number(rowAndColumn[1]);
             resultList[row][column] = 1;
         }
 
