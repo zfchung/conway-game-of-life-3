@@ -7,7 +7,7 @@ export class World {
 
     constructor(private liveCoordinateList: string[]) {
         this.setCoordinateList();
-        this.setCoordinateRecord();
+        this.liveCoordinateRecord = World.convertCoordinateRecord(liveCoordinateList);
     }
 
     private setCoordinateList() {
@@ -39,6 +39,8 @@ export class World {
 
         const liveCoordinateRecord: Record<string, Coordinate> = {};
         const deadCoordinateRecord: Record<string, Coordinate> = Object.assign({}, this.coordinateRecord);
+        // modern javascript way to object.assign
+        const newDeadCoordinateRecord: Record<string, Coordinate> = {...this.coordinateRecord};
         const nextGenLiveCoordinateList: string[] = [];
 
         for (let value of this.liveCoordinateList) {
@@ -95,11 +97,24 @@ export class World {
 
     private setCoordinateRecord() {
         for (let value of this.liveCoordinateList) {
+            const test1 = "s";
+            test1 = "c"
             const valueArr = value.split("_");
             const row = Number(valueArr[0]);
             const column = Number(valueArr[1]);
             this.liveCoordinateRecord[value] = new Coordinate(row, column);
         }
+    }
+
+    private static convertCoordinateRecord(liveCoordinateList: string[]) {
+        const liveCoordinateRecord: Record<string, Coordinate> = {};
+        for (let value of liveCoordinateList) {
+            const valueArr = value.split("_");
+            const row = Number(valueArr[0]);
+            const column = Number(valueArr[1]);
+            liveCoordinateRecord[value] = new Coordinate(row, column);
+        }
+        return liveCoordinateRecord;
     }
 
     private newCalculateCountOfNeighbours() {
@@ -159,5 +174,35 @@ export class World {
         this.newCalculateCountOfNeighbours();
         const newNextGenLiveCoordinateList = this.newCalculateNextGeneration();
         return new World(newNextGenLiveCoordinateList);
+    }
+
+    public newDisplayResult() {
+
+        const coordinateKeys = Object.keys(this.coordinateRecord);
+        const resultList: number[] = coordinateKeys.map(value => {
+            let state = 0;
+            if (this.liveCoordinateList.includes(value)) {
+                state = 1;
+            }
+            return state;
+        });
+
+
+
+        let rowList: number[] = [];
+        let count = 0;
+        let result = [];
+
+        for (let value of resultList) {
+            rowList.push(value);
+            count++;
+            if (count == Coordinate.getRow()) {
+                result.push(rowList);
+                rowList = [];
+                count = 0;
+            }
+        }
+
+        return result;
     }
 }
