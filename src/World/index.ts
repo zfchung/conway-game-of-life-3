@@ -1,8 +1,8 @@
 import {Coordinate} from "../Coordinate";
 
 export class World {
-    public readonly liveCoordinateRecord: Record<string, Coordinate> = {};
-    public allLiveCellDeadNeighbourRecord: Record<string, Coordinate> = {};
+    private readonly liveCoordinateRecord: Record<string, Coordinate> = {};
+    private allLiveCellDeadNeighbourRecord: Record<string, Coordinate> = {};
 
     constructor(liveCoordinateList: string[]) {
         this.liveCoordinateRecord = World.convertCoordinateRecord(liveCoordinateList);
@@ -19,7 +19,7 @@ export class World {
         return liveCoordinateRecord;
     }
 
-    private newCalculateCountOfNeighbours() {
+    private calculateCountOfNeighbours() {
         let allLiveCellNeighbourList = [];
         const liveCoordinateList = Object.keys(this.liveCoordinateRecord);
         for (let key in this.liveCoordinateRecord) {
@@ -49,7 +49,7 @@ export class World {
         }
     }
 
-    private newCalculateNextGeneration() {
+    private calculateNextGeneration() {
         const nextGenLiveCoordinateList: string[] = [];
 
         for (let key in this.liveCoordinateRecord) {
@@ -71,13 +71,13 @@ export class World {
         return nextGenLiveCoordinateList;
     }
 
-    public newTick() {
-        this.newCalculateCountOfNeighbours();
-        const newNextGenLiveCoordinateList = this.newCalculateNextGeneration();
+    public tick() {
+        this.calculateCountOfNeighbours();
+        const newNextGenLiveCoordinateList = this.calculateNextGeneration();
         return new World(newNextGenLiveCoordinateList);
     }
 
-    public newDisplayResult() {
+    public displayResult() {
         const resultList: number[][] = [];
         const liveCoordinateList = Object.keys(this.liveCoordinateRecord);
 
