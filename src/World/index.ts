@@ -78,6 +78,19 @@ export class World {
     }
 
     public newDisplayResult() {
-        // const result = "0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0\n";
+        const resultList: number[][] = [];
+        const liveCoordinateList = Object.keys(this.liveCoordinateRecord);
+
+        for(let i = 0; i < Coordinate.getRow(); i++){
+            resultList.push([0,0,0,0,0,0]);
+        }
+        for(let coordinate of liveCoordinateList){
+            const rowAndColumn = coordinate.split("_");
+            const row = parseInt(rowAndColumn[0]);
+            const column = parseInt(rowAndColumn[1]);
+            resultList[row][column] = 1;
+        }
+
+        return resultList;
     }
 }

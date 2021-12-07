@@ -7,7 +7,7 @@ const liveCellCoordinates = {
     blinkerShape: ["1_2", "2_2", "3_2"],
     toadShape: ["2_2", "2_3", "2_4", "3_1", "3_2", "3_3"]
 };
-const world = new World(liveCellCoordinates.blinkerShape);
+const world = new World(liveCellCoordinates.toadShape);
 console.log(world.newDisplayResult())
 
 const newWorld = world.newTick();
