@@ -49,21 +49,21 @@ export class World {
         }
     }
 
-    private calculateNextGeneration() {
+    private static calculateNextGeneration(liveCoordinateRecord: Record<string,Coordinate>, allLiveCellDeadNeighbourRecord: Record<string,Coordinate>) {
         const nextGenLiveCoordinateList: string[] = [];
 
-        for (let key in this.liveCoordinateRecord) {
-            const liveNeighbourCount = this.liveCoordinateRecord[key].getCountOfLivingNeighbours();
+        for (let key in liveCoordinateRecord) {
+            const liveNeighbourCount = liveCoordinateRecord[key].getCountOfLivingNeighbours();
             if (liveNeighbourCount == 2 || liveNeighbourCount == 3) {
-                const coordinateId = this.liveCoordinateRecord[key].getId();
+                const coordinateId = liveCoordinateRecord[key].getId();
                 nextGenLiveCoordinateList.push(coordinateId);
             }
         }
 
-        for (let key in this.allLiveCellDeadNeighbourRecord) {
-            const liveNeighbourCount = this.allLiveCellDeadNeighbourRecord[key].getCountOfLivingNeighbours();
+        for (let key in allLiveCellDeadNeighbourRecord) {
+            const liveNeighbourCount = allLiveCellDeadNeighbourRecord[key].getCountOfLivingNeighbours();
             if (liveNeighbourCount == 3) {
-                const coordinateId = this.allLiveCellDeadNeighbourRecord[key].getId();
+                const coordinateId = allLiveCellDeadNeighbourRecord[key].getId();
                 nextGenLiveCoordinateList.push(coordinateId);
             }
         }
@@ -73,8 +73,8 @@ export class World {
 
     public tick() {
         this.calculateCountOfNeighbours();
-        const newNextGenLiveCoordinateList = this.calculateNextGeneration();
-        return new World(newNextGenLiveCoordinateList);
+        const nextGenLiveCoordinateList = World.calculateNextGeneration(this.liveCoordinateRecord, this.allLiveCellDeadNeighbourRecord);
+        return new World(nextGenLiveCoordinateList);
     }
 
     public displayResult() {
