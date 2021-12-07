@@ -78,12 +78,9 @@ export class World {
     }
 
     public displayResult() {
-        const resultList: number[][] = [];
+        const resultList = Coordinate.getBoardArray();
         const liveCoordinateList = Object.keys(this.liveCoordinateRecord);
 
-        for(let i = 0; i < Coordinate.getRow(); i++){
-            resultList.push([0,0,0,0,0,0]);
-        }
         for(let coordinate of liveCoordinateList){
             const rowAndColumn = coordinate.split("_");
             const row = parseInt(rowAndColumn[0]);

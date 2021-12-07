@@ -38,8 +38,18 @@ export class Coordinate {
         return this.countOfLivingNeighbour;
     }
 
-    public static getRow() {
-        return this.rowSize;
+    public static getBoardArray(){
+        const resultList: number[][] = [];
+
+        for(let i = 0; i < Coordinate.rowSize; i++){
+            const rowArr = [];
+            for(let i = 0; i < Coordinate.columnSize; i++){
+                rowArr.push(0);
+            }
+            resultList.push(rowArr);
+        }
+
+        return resultList;
     }
 
 }
