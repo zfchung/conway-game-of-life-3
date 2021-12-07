@@ -18,3 +18,10 @@ World.displayResult(newNewWorld);
 
 const newNewNewWorld = World.tick(newNewWorld);
 World.displayResult(newNewNewWorld);
+
+const argv = require('minimist')(process.argv.slice(2));
+if(argv.world){
+    console.log("yay", argv.world)
+} else {
+    console.log("opps")
+}
