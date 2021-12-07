@@ -71,15 +71,15 @@ export class World {
         return nextGenLiveCoordinateList;
     }
 
-    public tick() {
-        this.calculateCountOfNeighbours();
-        const nextGenLiveCoordinateList = World.calculateNextGeneration(this.liveCoordinateRecord, this.allLiveCellDeadNeighbourRecord);
+    public static tick(world: World) {
+        world.calculateCountOfNeighbours();
+        const nextGenLiveCoordinateList = World.calculateNextGeneration(world.liveCoordinateRecord, world.allLiveCellDeadNeighbourRecord);
         return new World(nextGenLiveCoordinateList);
     }
 
-    public displayResult() {
+    public static displayResult(world: World) {
         const resultList = Coordinate.getBoardArray();
-        const liveCoordinateList = Object.keys(this.liveCoordinateRecord);
+        const liveCoordinateList = Object.keys(world.liveCoordinateRecord);
 
         for(let coordinate of liveCoordinateList){
             const rowAndColumn = coordinate.split("_");
@@ -88,6 +88,6 @@ export class World {
             resultList[row][column] = 1;
         }
 
-        return resultList;
+        console.log(resultList);
     }
 }
