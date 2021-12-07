@@ -19,3 +19,21 @@
 
 - Interfaces as template for different games (2D, 3D, Zombie Cell etc.)
 - Interfaces help to do lower coupling?
+
+
+- For an infinite size boardgame, we can try to  get the boundary of the board by understanding the largest/smallest row or column of livecells
+
+- Aim: we don't want the World to be tied up with the implementation of the dimension of the board 
+    - we do need to calculate the boundary of the board, this could be done out side of the World class by either putting it in an Interface which the World class can use/change it when it's a 2D or 3D etc. 
+    - or it could be in the Coordinate class instead 
+
+- how to generate or parse id should be with coordinate instead of world class
+
+- Interface for Coordinate (iCoordinate) to separate 2D and 3D implementation, which the World just need to interact the consistent methods of 2D and 3D
+
+jest integration test
+1. yarn dev --world="1_1,1_2,2_1,2_2"
+2. get result from cli
+3. compared with expected result
+4. pass or fail 
+
