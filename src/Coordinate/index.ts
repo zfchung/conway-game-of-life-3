@@ -1,4 +1,8 @@
-export class Coordinate {
+interface ICoordinate {
+    getId(): string;
+}
+
+export class Coordinate implements ICoordinate {
     private countOfLivingNeighbour: number = 0;
     private static rowSize: number = 6;
     private static columnSize: number = 6;
