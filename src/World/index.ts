@@ -11,10 +11,7 @@ export class World {
     private static convertCoordinateRecord(liveCoordinateList: string[]) {
         const liveCoordinateRecord: Record<string, Coordinate> = {};
         for (let value of liveCoordinateList) {
-            const valueArr = value.split("_");
-            const row = Number(valueArr[0]);
-            const column = Number(valueArr[1]);
-            liveCoordinateRecord[value] = new Coordinate(row, column);
+            liveCoordinateRecord[value] = new Coordinate(value);
         }
         return liveCoordinateRecord;
     }
@@ -33,10 +30,7 @@ export class World {
         let allLiveCellDeadNeighbourList: string[] = allLiveCellNeighbourList.filter(val => !liveCoordinateList.includes(val));
 
         for (let value of allLiveCellDeadNeighbourList) {
-            const valueArr = value.split("_");
-            const row = Number(valueArr[0]);
-            const column = Number(valueArr[1]);
-            this.allLiveCellDeadNeighbourRecord[value] = new Coordinate(row, column);
+            this.allLiveCellDeadNeighbourRecord[value] = new Coordinate(value);
         }
 
         for (let key in this.allLiveCellDeadNeighbourRecord) {

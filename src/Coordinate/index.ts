@@ -2,12 +2,26 @@ export class Coordinate {
     private countOfLivingNeighbour: number = 0;
     private static rowSize: number = 6;
     private static columnSize: number = 6;
+    private readonly row: number;
+    private readonly column: number;
 
-    constructor(private row: number, private column: number) {
+    constructor(private coordinateId: string) {
+        this.row = Coordinate.getRowFromId(coordinateId);
+        this.column = Coordinate.getColumnFromId(coordinateId);
     }
 
     public getId() {
-        return this.row + "_" + this.column;
+        return this.coordinateId;
+    }
+
+    private static getRowFromId(coordinateId: string){
+        const rowAndColumn = coordinateId.split("_");
+        return Number(rowAndColumn[0]);
+    }
+
+    private static getColumnFromId(coordinateId: string){
+        const rowAndColumn = coordinateId.split("_");
+        return Number(rowAndColumn[1]);
     }
 
     public getNeighbourCoordinateList() {

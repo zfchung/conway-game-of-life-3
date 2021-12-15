@@ -20,7 +20,7 @@
 - Interfaces as template for different games (2D, 3D, Zombie Cell etc.)
 - Interfaces help to do lower coupling?
 
-
+7-Dec
 - For an infinite size boardgame, we can try to  get the boundary of the board by understanding the largest/smallest row or column of livecells
 
 - Aim: we don't want the World to be tied up with the implementation of the dimension of the board 
