@@ -1,4 +1,5 @@
 import {World} from "./World";
+const argv = require('minimist')(process.argv.slice(2));
 
 const liveCellCoordinates = {
     blockShape: ["1_1", "1_2", "2_1", "2_2"],
@@ -7,21 +8,15 @@ const liveCellCoordinates = {
     blinkerShape: ["1_2", "2_2", "3_2"],
     toadShape: ["2_2", "2_3", "2_4", "3_1", "3_2", "3_3"]
 };
-const world = new World(liveCellCoordinates.toadShape);
-World.displayResult(world);
 
-const newWorld = World.tick(world);
-World.displayResult(newWorld);
-
-const newNewWorld = World.tick(newWorld);
-World.displayResult(newNewWorld);
-
-const newNewNewWorld = World.tick(newNewWorld);
-World.displayResult(newNewNewWorld);
-
-const argv = require('minimist')(process.argv.slice(2));
-if(argv.world){
-    console.log("yay", argv.world)
+if (argv.world) {
+    const receivedShape = argv.world.split(",");
+    const world = new World(receivedShape);
+    const newWorld = World.tick(world);
+    World.getLiveCells(newWorld);
 } else {
-    console.log("opps")
+    const world = new World(liveCellCoordinates.toadShape);
+    const newWorld = World.tick(world);
+    World.displayResult(newWorld);
 }
+
