@@ -37,3 +37,7 @@ jest integration test
 3. compared with expected result
 4. pass or fail 
 
+- it is easier to build something that is easy to throw away and build it again
+- compared to building a software that is predicting requirements/scenarios that might not happen 
+- YAGNI
+- https://_github_.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition
