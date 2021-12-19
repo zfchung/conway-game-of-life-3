@@ -85,8 +85,9 @@ export class World {
         console.log(resultList);
     }
 
-    public static getLiveCells(world: World) {
+    public static getLiveCells(world: World): string[] {
         const liveCoordinateList = Object.keys(world.liveCoordinateRecord);
         console.log(liveCoordinateList);
+        return liveCoordinateList;
     }
 }
